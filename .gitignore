@@ -1,0 +1,24 @@
+# Archivos de entorno
+.env
+.env.local
+
+# Dependencias de Node
+node_modules/
+npm-debug.log*
+
+# Archivos generados por el IDE
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs y temporales
+logs/
+*.log
+*.tmp
+
+# Base de datos local (si usas archivos)
+*.db
