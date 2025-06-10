@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:5000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4YmRiNzM4MzU0ZDNlOTEwNmY0MTciLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDk1OTg5OTUsImV4cCI6MTc0OTYwMjU5NX0.RNiWRbOylupq3Npk76Vy8X1XiBY-27BO0adohtZX_AQ
+
+### Register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "luisfer74081@gmail.com",
+  "password": "F3rn@ndo"
+}
+
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@bingo.com",
+  "password": "F3rn@ndo"
+}
+
+### Obtener usuarios
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+### update user
+PUT {{baseUrl}}/users/6848bdb738354d3e9106f417
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": "admin@bingo.com",
+  "isAdmin": true
+}
+
+### eliminar usuario
+DELETE {{baseUrl}}/users/6848c26ca0cafd420b3941c9
+Content-Type: application/json
+Authorization: Bearer {{token}}
+

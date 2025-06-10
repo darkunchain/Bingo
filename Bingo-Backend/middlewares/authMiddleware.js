@@ -14,6 +14,8 @@ exports.authenticate = (req, res, next) => {
 };
 
 exports.isAdmin = (req, res, next) => {
-  if (!req.user?.isAdmin) return res.status(403).json({ error: 'Acceso prohibido' });
+  if (!req.user?.isAdmin) {
+    return res.status(403).json({ error: 'Acceso prohibido: se requiere rol de admin' });
+  }
   next();
 };
