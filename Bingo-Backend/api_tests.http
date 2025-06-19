@@ -1,6 +1,7 @@
 @baseUrl = http://localhost:5000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4YmRiNzM4MzU0ZDNlOTEwNmY0MTciLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDk1OTg5OTUsImV4cCI6MTc0OTYwMjU5NX0.RNiWRbOylupq3Npk76Vy8X1XiBY-27BO0adohtZX_AQ
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4YmRiNzM4MzU0ZDNlOTEwNmY0MTciLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NTAzNjk2NjIsImV4cCI6MTc1MDM3MzI2Mn0.4752-zqYj-7Q_s4V9wU-g74SQZdVpOKHf_X18qcT4q0
+@gameId = 6854859989926a809276d515
+@tokenDeCarton = ff951d331420e153
 ### Register
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
@@ -39,3 +40,56 @@ DELETE {{baseUrl}}/users/6848c26ca0cafd420b3941c9
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+###
+# 6. Crear juego de bingo
+POST {{baseUrl}}/game/create
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Bingo Nocturno",
+  "pattern": "FULL"
+}
+
+###
+# 7. Iniciar el juego
+POST {{baseUrl}}/game/{{gameId}}/start
+Authorization: Bearer {{token}}
+
+###
+# 8. Crear 50 cartones para ese juego
+POST {{baseUrl}}/bingo/create
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "quantity": 50,
+  "gameId": "{{gameId}}"
+}
+
+###
+# 9. Reclamar cartón por token (simula entrada de usuario con código)
+POST {{baseUrl}}/bingo/claim
+Content-Type: application/json
+
+{
+  "token": "{{tokenDeCarton}}"
+}
+
+###
+# 10. Extraer una balota (sólo admin/master)
+POST {{baseUrl}}/game/{{gameId}}/draw
+Authorization: Bearer {{token}}
+
+###
+# 11. Verificar que el juego avance, repite el draw para simular balotas en tiempo real
+POST {{baseUrl}}/game/{{gameId}}/draw
+Authorization: Bearer {{token}}
+
+###
+# 12. (Opcional) Verifica Socket.io desde el front para ver balotas en tiempo real
+
+###
+# 13. (Opcional) Consulta estado del juego (puedes agregar una ruta GET si la implementas)
+GET {{baseUrl}}/game/{{gameId}}
+Authorization: Bearer {{token}}

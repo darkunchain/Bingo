@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const bingoRoutes = require('./routes/bingoRoutes');   // NUEVO
+const gameRoutes = require('./routes/gameRoutes');     // NUEVO
 
 const app = express();
 
@@ -19,9 +21,28 @@ mongoose.connect(process.env.MONGODB_URI)
 // Rutas
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/bingo', bingoRoutes);  // NUEVO
+app.use('/api/game', gameRoutes);    // NUEVO
 
-// Iniciar servidor
+// --- SOCKET.IO CONFIG ---
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server, { cors: { origin: '*' } });
+
+io.on('connection', (socket) => {
+  console.log('Usuario conectado al bingo');
+
+  // Unirse a un juego específico
+  socket.on('joinGame', (gameId) => {
+    socket.join(gameId);
+  });
+
+  // Aquí puedes poner eventos adicionales para notificar balotas nuevas, ganadores, etc.
+});
+
+// Iniciar servidor (ahora con server en vez de app)
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

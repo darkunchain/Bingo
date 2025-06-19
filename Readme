@@ -1,0 +1,76 @@
+Estructura Backend
+
+bingo-backend/
+├── controllers/
+│   ├── authController.js
+│   ├── userController.js
+│   ├── bingoController.js
+│   └── gameController.js
+├── middlewares/
+│   └── authMiddleware.js
+├── models/
+│   ├── User.js
+│   ├── BingoCard.js
+│   └── Game.js
+├── routes/
+│   ├── authRoutes.js
+│   ├── userRoutes.js
+│   ├── bingoRoutes.js
+│   └── gameRoutes.js
+├── utils/
+│   └── bingoCardGenerator.js
+├── package.json
+├── server.js
+└── .env.example
+
+
+
+Estructura del Frontend:
+
+bingo-frontend/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── api/
+│   │   ├── auth.ts
+│   │   ├── bingo.ts
+│   │   └── game.ts
+│   ├── assets/
+│   ├── components/
+│   │   ├── Auth/
+│   │   │   ├── Login.tsx
+│   │   │   └── Register.tsx
+│   │   ├── Bingo/
+│   │   │   ├── BingoBoard.tsx
+│   │   │   ├── CartonInput.tsx
+│   │   │   ├── CartonList.tsx
+│   │   │   └── CartonQRReader.tsx
+│   │   ├── Game/
+│   │   │   ├── GameLobby.tsx
+│   │   │   ├── BallHistory.tsx
+│   │   │   └── GameStatus.tsx
+│   │   └── Layout/
+│   │       ├── Navbar.tsx
+│   │       └── ProtectedRoute.tsx
+│   ├── context/
+│   │   ├── AuthContext.tsx
+│   │   └── SocketContext.tsx
+│   ├── hooks/
+│   │   └── useAuth.ts
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   ├── Game.tsx
+│   │   ├── Login.tsx
+│   │   ├── Register.tsx
+│   │   └── NotFound.tsx
+│   ├── types/
+│   │   ├── bingo.d.ts
+│   │   └── user.d.ts
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── vite-env.d.ts
+│   └── index.css
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+
